@@ -14,6 +14,8 @@ wget -o ip2json.sh  https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/ip2
 
 chmod +x ip2json.sh
 
-bash ip2json.sh > REJECT.json
+bash ip2json.sh > /etc/sing-box/REJECT.json
 
-cat REJECT.json
+cat /etc/sing-box/REJECT.json
+
+systemctl restart sing-box

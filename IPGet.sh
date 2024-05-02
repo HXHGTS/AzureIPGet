@@ -10,11 +10,10 @@ jq '.values[] | select(.properties.region | test("japaneast|japanwest|koreacentr
 
 #jq '.values[] | select(.properties.region | test("japaneast|japanwest|koreacentral|koreasouth")) | select(.properties.systemService | test("sql")) | .properties.addressPrefixes' ServiceTags_Public.json | grep : | sed -e 's/"//g;s/,//g;s/\[//g;s/\]//g;s/{//g;s/}//g;s/ //g' | grep / >> ip.txt
 
-# 将ip.txt文件中的每行读取为JSON数组
-ip_cidr=$(jq -R -s 'split("\n")[:-1]' ip.txt)
+curl -sSL https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/ip2json.sh > ip2json.sh
 
-# 使用jq生成JSON结构
-echo "{\"route\": {\"rules\": [{\"ip_cidr\": $ip_cidr, \"outbound\": \"REJECT\"}]}}" > ip.json
+chmod +x ip2json.sh
 
-# 输出最终的ip.json文件内容
-cat ip.json
+bash ip2json.sh > REJECT.json
+
+cat REJECT.json

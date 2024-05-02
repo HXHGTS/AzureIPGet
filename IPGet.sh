@@ -10,7 +10,7 @@ jq '.values[] | select(.properties.region | test("japaneast|japanwest|koreacentr
 
 #jq '.values[] | select(.properties.region | test("japaneast|japanwest|koreacentral|koreasouth")) | select(.properties.systemService | test("sql")) | .properties.addressPrefixes' ServiceTags_Public.json | grep : | sed -e 's/"//g;s/,//g;s/\[//g;s/\]//g;s/{//g;s/}//g;s/ //g' | grep / >> ip.txt
 
-wget -o ip2json.sh  https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/ip2json.sh
+wget -O ip2json.sh  https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/ip2json.sh
 
 chmod +x ip2json.sh
 

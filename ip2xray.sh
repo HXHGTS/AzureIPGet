@@ -14,7 +14,7 @@ json_content=$(printf '{
         "rules": [
             {
                 "ip": [%s],
-                "port": "3000-4000,6000-6100,10000:10099",
+                "port": "3075,6000-6100,10000:10099",
                 "network": "udp",
                 "outboundTag": "REJECT"
             }

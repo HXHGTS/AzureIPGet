@@ -23,4 +23,4 @@ json_content=$(printf '{
 }' "$(printf '"%s",' "${ip_cidr[@]}" | sed 's/,$//')")
 
 # 使用jq美化JSON输出
-echo "$json_content" | jq .
+echo "$json_content" | jq

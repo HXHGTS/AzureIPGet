@@ -15,7 +15,8 @@ json_content=$(printf '{
             {
                 "ip_cidr": [%s],
                 "network": ["udp"],
-                "port_range": ["3000:4000", "6000:6100", "10000:10099"],
+                "port": ["3075"],
+                "port_range": ["6000:6100", "10000:10099"],
                 "outbound": "REJECT"
             }
         ]

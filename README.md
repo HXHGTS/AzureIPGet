@@ -8,3 +8,8 @@ curl -sSL https://worker-long-field-f675.qq0mjpmkt9z.workers.dev/HXHGTS/AzureIPG
 ```
 
 [IP源数据下载](https://www.microsoft.com/en-us/download/details.aspx?id=56519)
+
+获取香港IPV4段:
+```
+jq '.values[] | select(.id | test("AzureCloud")) | select((.properties.region | test("eastasia")) and (.properties.region | test("southeastasia") | not)) | .properties.addressPrefixes' ServiceTags_Public.json | grep -v : | sed -e 's/"//g;s/,//g;s/\[//g;s/\]//g;s/{//g;s/}//g;s/ //g' | grep /
+```

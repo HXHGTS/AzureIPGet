@@ -23,7 +23,7 @@ bash tcping.sh
 ```
 
 ```
-apt install -y netcat-openbsd
+apt install -y netcat-openbsd bc
 
 wget https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/udping.sh -O /root/udping.sh
 

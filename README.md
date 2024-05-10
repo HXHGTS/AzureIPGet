@@ -14,8 +14,10 @@ curl -sSL https://cdn.jsdelivr.net/gh/HXHGTS/AzureIPGet@main/IPGet.sh | bash
 jq '.values[] | select(.id | test("AzureCloud")) | select((.properties.region | test("eastasia")) and (.properties.region | test("southeastasia") | not)) | .properties.addressPrefixes' ServiceTags_Public.json | grep -v : | sed -e 's/"//g;s/,//g;s/\[//g;s/\]//g;s/{//g;s/}//g;s/ //g' | grep /
 ```
 
+```
 wget https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/tcping.sh -O /root/tcping.sh
 
 chmod +x tcping.sh
 
 bash tcping.sh
+```

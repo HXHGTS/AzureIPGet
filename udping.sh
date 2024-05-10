@@ -2,21 +2,42 @@
 
 # 检查参数个数
 if [ "$#" -ne 2 ]; then
-    echo "用法: $0 <ip地址> <端口>"
+    echo "用法: $0 <服务器IP> <端口>"
     exit 1
 fi
 
-# 读取IP地址和端口参数
-IP=$1
+# 读取服务器IP和端口参数
+SERVER_IP=$1
 PORT=$2
+PACKET_COUNT=100
+TIMEOUT=1
+DELAY=0.01 # 每个包之间的延迟
+SENT=0
+RECEIVED=0
 
-# 设置超时时间
-TIMEOUT=3
+# 发送数据包
+for i in $(seq 1 $PACKET_COUNT)
+do
+    # 记录发送时间
+    START_TIME=$(date +%s%N)
+    echo "Ping" | nc -u -w $TIMEOUT $SERVER_IP $PORT
+    if [ $? -eq 0 ]; then
+        # 记录接收时间
+        END_TIME=$(date +%s%N)
+        # 计算延迟
+        DELTA_TIME=$((($END_TIME - $START_TIME)/1000000))
+        DELAY=$(($DELAY + $DELTA_TIME))
+        RECEIVED=$(($RECEIVED+1))
+    fi
+    SENT=$(($SENT+1))
+    sleep $DELAY
+done
 
-# 发送UDP数据包并监听响应
-echo "Ping $IP:$PORT via UDP..."
-if nc -u -w $TIMEOUT $IP $PORT < /dev/null; then
-    echo "从 $IP 的 $PORT 端口成功接收到UDP响应"
-else
-    echo "无法从 $IP 的 $PORT 端口接收到UDP响应"
-fi
+# 计算丢包率和平均延迟
+LOSS_RATE=$(echo "scale=2; (1-($RECEIVED/$SENT))*100" | bc)
+AVERAGE_DELAY=$(echo "scale=2; $DELAY/$RECEIVED" | bc)
+
+echo "发送数据包: $SENT"
+echo "接收数据包: $RECEIVED"
+echo "丢包率: $LOSS_RATE%"
+echo "平均延迟: $AVERAGE_DELAY ms"

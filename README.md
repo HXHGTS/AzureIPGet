@@ -21,3 +21,13 @@ chmod +x tcping.sh
 
 bash tcping.sh
 ```
+
+```
+apt install -y netcat
+
+wget https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/udping.sh -O /root/udping.sh
+
+chmod +x udping.sh
+
+bash udping.sh
+```

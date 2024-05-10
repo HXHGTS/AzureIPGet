@@ -9,11 +9,12 @@ fi
 # 读取服务器IP和端口参数
 SERVER_IP=$1
 PORT=$2
-PACKET_COUNT=100
+PACKET_COUNT=1000
 TIMEOUT=1
 DELAY=0.01 # 每个包之间的延迟
 SENT=0
 RECEIVED=0
+TOTAL_DELAY=0
 
 # 发送数据包
 for i in $(seq 1 $PACKET_COUNT)
@@ -26,7 +27,7 @@ do
         END_TIME=$(date +%s%N)
         # 计算延迟
         DELTA_TIME=$((($END_TIME - $START_TIME)/1000000))
-        DELAY=$(($DELAY + $DELTA_TIME))
+        TOTAL_DELAY=$(echo "$TOTAL_DELAY + $DELTA_TIME" | bc)
         RECEIVED=$(($RECEIVED+1))
     fi
     SENT=$(($SENT+1))
@@ -34,10 +35,13 @@ do
 done
 
 # 计算丢包率和平均延迟
-LOSS_RATE=$(echo "scale=2; (1-($RECEIVED/$SENT))*100" | bc)
-AVERAGE_DELAY=$(echo "scale=2; $DELAY/$RECEIVED" | bc)
-
-echo "发送数据包: $SENT"
-echo "接收数据包: $RECEIVED"
-echo "丢包率: $LOSS_RATE%"
-echo "平均延迟: $AVERAGE_DELAY ms"
+if [ $RECEIVED -ne 0 ]; then
+    LOSS_RATE=$(echo "scale=2; (1-($RECEIVED/$SENT))*100" | bc)
+    AVERAGE_DELAY=$(echo "scale=2; $TOTAL_DELAY/$RECEIVED" | bc)
+    echo "发送数据包: $SENT"
+    echo "接收数据包: $RECEIVED"
+    echo "丢包率: $LOSS_RATE%"
+    echo "平均延迟: $AVERAGE_DELAY ms"
+else
+    echo "没有收到任何响应，无法计算丢包率和延迟。"
+fi

@@ -24,6 +24,7 @@ if [ -d "/usr/local/etc/xray" ]; then
     cat /usr/local/etc/xray/REJECT.json
     # 重启 xray 服务
     systemctl restart xray
+    rm -f ip2xray.sh
 # 如果 /usr/local/etc/xray 目录不存在，检查 /etc/sing-box 目录是否存在
 elif [ -d "/etc/sing-box" ]; then
     # 下载 ip2sing.sh 脚本
@@ -36,8 +37,8 @@ elif [ -d "/etc/sing-box" ]; then
     cat /etc/sing-box/REJECT.json
     # 重启 sing-box 服务
     systemctl restart sing-box
+    rm -f ip2sing.sh
 # 如果两个目录都不存在，返回提示信息
 else
     echo "未发现可执行脚本的路径！"
 fi
-

@@ -2,9 +2,9 @@
 
 apt install -y jq wget
 
-wget -O ServiceTags_Public.json https://cdn.jsdelivr.net/gh/HXHGTS/AzureIPGet@main/ServiceTags_Public.json
+wget -O ServiceTags_Public.json https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/ServiceTags_Public.json
 
-jq '.values[] | select(.id | test("AzureCloud")) | select(.properties.region | test("japaneast|japanwest|koreacentral|koreasouth")) | .properties.addressPrefixes' ServiceTags_Public.json | grep -v : | sed -e 's/"//g;s/,//g;s/\[//g;s/\]//g;s/{//g;s/}//g;s/ //g' | grep / > ip.txt
+jq '.values[] | select(.id | test("AzureCloud")) | select(.properties.region | test("japaneast|japanwest|koreacentral|koreasouth")) | .properties.addressPrefixes' ServiceTags_Public.json | grep -v : | sed -e 's/"//g;s/,//g;s/\[//g;s/\]//g;s/{//g;s/}//g;s/ //g' | grep / >ip.txt
 
 #jq '.values[] | select(.id | test("AzureCloud")) | select(.properties.region | test("japaneast|japanwest|koreacentral|koreasouth")) | .properties.addressPrefixes' ServiceTags_Public.json | grep : | sed -e 's/"//g;s/,//g;s/\[//g;s/\]//g;s/{//g;s/}//g;s/ //g' | grep / >> ip.txt
 
@@ -15,11 +15,11 @@ jq '.values[] | select(.id | test("AzureCloud")) | select(.properties.region | t
 # 检查 /usr/local/etc/xray 目录是否存在
 if [ -d "/usr/local/etc/xray" ]; then
     # 下载 ip2xray.sh 脚本
-    wget -O ip2xray.sh https://cdn.jsdelivr.net/gh/HXHGTS/AzureIPGet@main/ip2xray.sh
+    wget -O ip2xray.sh https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/ip2xray.sh
     # 赋予执行权限
     chmod +x ip2xray.sh
     # 执行脚本并输出到 REJECT.json
-    bash ip2xray.sh > /usr/local/etc/xray/REJECT.json
+    bash ip2xray.sh >/usr/local/etc/xray/REJECT.json
     # 输出 REJECT.json 的内容
     cat /usr/local/etc/xray/REJECT.json
     # 重启 xray 服务
@@ -28,11 +28,11 @@ if [ -d "/usr/local/etc/xray" ]; then
 # 如果 /usr/local/etc/xray 目录不存在，检查 /etc/sing-box 目录是否存在
 elif [ -d "/etc/sing-box" ]; then
     # 下载 ip2sing.sh 脚本
-    wget -O ip2sing.sh https://cdn.jsdelivr.net/gh/HXHGTS/AzureIPGet@main/ip2sing.sh
+    wget -O ip2sing.sh https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/ip2sing.sh
     # 赋予执行权限
     chmod +x ip2sing.sh
     # 执行脚本并输出到 REJECT.json
-    bash ip2sing.sh > /etc/sing-box/REJECT.json
+    bash ip2sing.sh >/etc/sing-box/REJECT.json
     # 输出 REJECT.json 的内容
     cat /etc/sing-box/REJECT.json
     # 重启 sing-box 服务

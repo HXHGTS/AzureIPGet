@@ -5,6 +5,8 @@
 运行:
 ```
 curl -sSL https://cdn.jsdelivr.net/gh/HXHGTS/AzureIPGet@main/IPGet.sh | bash
+```
+```
 curl -sSL https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/IPGet.sh | bash
 ```
 

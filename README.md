@@ -5,6 +5,7 @@
 运行:
 ```
 curl -sSL https://cdn.jsdelivr.net/gh/HXHGTS/AzureIPGet@main/IPGet.sh | bash
+curl -sSL https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/IPGet.sh | bash
 ```
 
 [IP源数据下载](https://www.microsoft.com/en-us/download/details.aspx?id=56519)

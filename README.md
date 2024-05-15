@@ -14,7 +14,7 @@ curl -sSL https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/JsonGet.sh | 
 
 获取香港IPV4段:
 ```
-https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/IPGet.sh
+curl -sSL https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/IPGet.sh | bash
 jq '.values[] | select(.id | test("AzureCloud")) | select((.properties.region | test("eastasia")) and (.properties.region | test("southeastasia") | not)) | .properties.addressPrefixes' ServiceTags_Public.json | grep -v : | sed -e 's/"//g;s/,//g;s/\[//g;s/\]//g;s/{//g;s/}//g;s/ //g' | grep /
 ```
 

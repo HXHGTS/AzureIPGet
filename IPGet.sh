@@ -7,3 +7,5 @@ curl 'https://www.microsoft.com/en-us/download/details.aspx?id=56519' --user-age
 echo '正在下载AzureIPRange数据库. . .'
 
 wget -O ServiceTags_Public.json -i GetAzureIPRange.txt
+
+rm -f GetAzureIPRange.txt

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-apt install -y jq wget sed
+apt install -y jq wget sed coreutils
 
 curl -fsSL https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/IPGet.sh | bash
 

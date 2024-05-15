@@ -1,5 +1,4 @@
-apt install -y wget
-
+#!/bin/sh
 curl 'https://www.microsoft.com/en-us/download/details.aspx?id=56519' \
     -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
     -H 'accept-language: zh-CN,zh;q=0.9' \

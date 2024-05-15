@@ -2,7 +2,7 @@
 
 apt install -y jq wget
 
-wget -O ServiceTags_Public.json https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/ServiceTags_Public.json
+curl -fsSL https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/IPGet.sh | bash
 
 jq '.values[] | select(.id | test("AzureCloud")) | select(.properties.region | test("japaneast|japanwest|koreacentral|koreasouth")) | .properties.addressPrefixes' ServiceTags_Public.json | grep -v : | sed -e 's/"//g;s/,//g;s/\[//g;s/\]//g;s/{//g;s/}//g;s/ //g' | grep / >ip.txt
 

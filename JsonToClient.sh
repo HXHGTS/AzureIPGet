@@ -10,9 +10,9 @@ jq '.values[] | select(.id | test("AzureCloud")) | select(.properties.region | t
 
 #chmod +x ip2xray.sh
 
-#bash ip2xray.sh >/usr/local/etc/xray/REJECT.json
+#bash ip2xray.sh > AzureIPBlock.json
 
-#cat REJECT.json
+#cat AzureIPBlock.json
 
 #rm -f ip2xray.sh ip.txt
 
@@ -20,8 +20,8 @@ wget -O ip2sing.sh https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/ip2s
 
 chmod +x ip2sing.sh
 
-bash ip2sing.sh REJECT.json
+bash ip2sing.sh > AzureIPBlock.json
 
-cat REJECT.json
+cat AzureIPBlock.json
 
 rm -f ip2sing.sh ip.txt ip.txt ServiceTags_Public.json

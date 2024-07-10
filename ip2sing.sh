@@ -13,7 +13,6 @@ json_content=$(printf '{
     "route": {
         "rules": [
             {
-                "process_name": ["RainbowSix.exe", "RainbowSix_Vulkan.exe"],
                 "ip_cidr": [%s],
                 "network": ["udp"],
                 "port_range": ["3060:3090", "6000:6100", "10000:10099"],

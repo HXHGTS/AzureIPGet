@@ -16,12 +16,12 @@ jq '.values[] | select(.id | test("AzureCloud")) | select(.properties.region | t
 
 #rm -f ip2xray.sh ip.txt
 
-wget -O ip2sing.sh https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/ip2singclient.sh
+wget -O ip2singclient.sh https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/ip2singclient.sh
 
-chmod +x ip2sing.sh
+chmod +x ip2singclient.sh
 
-bash ip2sing.sh > AzureIPBlock.json
+bash ip2singclient.sh > AzureIPBlock.json
 
 cat AzureIPBlock.json
 
-rm -f ip2sing.sh ip.txt ip.txt ServiceTags_Public.json
+rm -f ip2singclient.sh ip.txt ip.txt ServiceTags_Public.json

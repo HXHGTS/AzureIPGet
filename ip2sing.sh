@@ -6,13 +6,14 @@ ip_cidr=()
 # 读取ip.txt文件并填充ip_cidr数组
 while IFS= read -r line; do
     ip_cidr+=("$line")
-done < ip.txt
+done <ip.txt
 
 # 使用printf和Bash数组创建JSON格式的字符串
 json_content=$(printf '{
     "route": {
         "rules": [
             {
+                "process_name": ["RainbowSix.exe", "RainbowSix_Vulkan.exe"],
                 "ip_cidr": [%s],
                 "network": ["udp"],
                 "port_range": ["3060:3090", "6000:6100", "10000:10099"],

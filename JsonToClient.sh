@@ -16,7 +16,7 @@ jq '.values[] | select(.id | test("AzureCloud")) | select(.properties.region | t
 
 #rm -f ip2xray.sh ip.txt
 
-wget -O ip2sing.sh https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/ip2sing.sh
+wget -O ip2sing.sh https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/ip2singclient.sh
 
 chmod +x ip2sing.sh
 

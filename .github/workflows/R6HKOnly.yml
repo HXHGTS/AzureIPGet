@@ -1,0 +1,58 @@
+name: Compile Rainbow Six Siege Asian Server filter geoip source file
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  geoip-r6s-compile:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install Necessary Tools
+      run: |
+        sudo apt install -y jq wget curl
+
+    - name: Install sing-box
+      run: |
+        sudo curl -fsSL https://sing-box.app/gpg.key -o /etc/apt/keyrings/sagernet.asc
+        sudo chmod a+r /etc/apt/keyrings/sagernet.asc
+        echo "deb [arch=`dpkg --print-architecture` signed-by=/etc/apt/keyrings/sagernet.asc] https://deb.sagernet.org/ * *" | \
+        sudo tee /etc/apt/sources.list.d/sagernet.list > /dev/null
+        sudo apt-get update
+        sudo apt-get install -y sing-box
+    
+    - name: Pull code from remote
+      run: git pull origin main --ff-only
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Format Source
+      run: |
+        sing-box rule-set compile --output geoip-r6hkonly.srs ./AzureIPGet/main/data/AzureIPBlock.json
+        rm -f ./AzureIPGet/main/data/AzureIPBlock.json
+
+    - name: Push Files
+      run: |
+        sudo mkdir -p geoip
+        sudo mv -f geoip-r6hkonly.srs geoip/geoip-r6hkonly.srs
+        sudo chown -R $USER:$USER geoip
+        sudo chmod -R 777 geoip
+        git config --global user.email "${{ secrets.GH_EMAIL }}"
+        git config --global user.name "github-actions[bot]"
+        sudo git add geoip/*.srs
+        if git diff-index --quiet HEAD --; then
+          echo "No changes to commit"
+        else
+          git commit -m "Auto Compile telegram geoip source file"
+          git push --force
+        fi
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        ACTIONS_RUNNER_DEBUG: true
+        ACTIONS_STEP_DEBUG: true

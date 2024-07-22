@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  request-ssl:
+  ip rule Generate:
     runs-on: ubuntu-latest
 
     steps:
@@ -32,12 +32,12 @@ jobs:
 
     - name: Push Files
       run: |
-        mkdir -p data
-        mv -f ServiceTags_Public.json ip.txt AzureIPBlock.json data
-        chown -R $USER:$USER data
-        chmod -R 755 data
+        sudo mkdir -p data
+        sudo mv -f ServiceTags_Public.json ip.txt AzureIPBlock.json data
+        sudo chown -R $USER:$USER data
+        sudo chmod -R 755 data
         git config --global user.email "${{ secrets.GH_EMAIL }}"
         git config --global user.name "github-actions[bot]"
-        git add data/
+        sudo git add data/
         git commit -m "Auto update sing-box RainbowSix ip block rule successfully!"
         git push

@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  ip rule Generate:
+  ip-rule-Generate:
     runs-on: ubuntu-latest
 
     steps:

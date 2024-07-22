@@ -41,3 +41,5 @@ jobs:
         sudo git add data/
         git commit -m "Auto update sing-box RainbowSix ip block rule successfully!"
         git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

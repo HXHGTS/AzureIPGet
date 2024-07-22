@@ -1,0 +1,43 @@
+name: sing-box RainbowSix ip block rule
+
+on:
+  push:
+    branches:
+    - main
+  schedule:
+  - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  request-ssl:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install Necessary Tools
+      run: |
+        apt install -y jq wget sed coreutils
+
+    - name: Download Json
+      run: |
+        curl 'https://www.microsoft.com/en-us/download/details.aspx?id=56519' --user-agent 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36' | sed -e 's/"/\n/g' | grep ServiceTags_Public_ | grep https | head -n 1 >GetAzureIPRange.txt
+        wget -O ServiceTags_Public.json -i GetAzureIPRange.txt
+        jq '.values[] | select(.id | test("AzureCloud")) | select(.properties.region | test("japaneast|japanwest|koreacentral|koreasouth")) | .properties.addressPrefixes' ServiceTags_Public.json | grep -v : | sed -e 's/"//g;s/,//g;s/\[//g;s/\]//g;s/{//g;s/}//g;s/ //g' | grep / >ip.txt
+
+    - name: Format Json
+      run: |
+        ip_cidr=(); while IFS= read -r line; do ip_cidr+=("$line"); done <ip.txt; json_content=$(printf '{"route":{"rules":[{"process_name":["RainbowSix.exe","RainbowSix_Vulkan.exe"],"ip_cidr":[%s],"network":["udp"],"port_range":["3060:3090","6000:6100","10000:10099"],"outbound":"REJECT"}]}}' "$(printf '"%s",' "${ip_cidr[@]}" | sed 's/,$//')"); echo "$json_content" | jq > AzureIPBlock.json
+
+    - name: Push Files
+      run: |
+        mkdir -p data
+        mv -f ServiceTags_Public.json ip.txt AzureIPBlock.json data
+        chown -R $USER:$USER data
+        chmod -R 755 data
+        git config --global user.email "${{ secrets.GH_EMAIL }}"
+        git config --global user.name "github-actions[bot]"
+        git add data/
+        git commit -m "Auto update sing-box RainbowSix ip block rule successfully!"
+        git push

@@ -12,8 +12,7 @@ curl -sSL https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/JsonGet.sh | 
 ```
 curl -sSL https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/JsonToClient.sh | bash
 ```
-
-[IP源数据下载](https://www.microsoft.com/en-us/download/details.aspx?id=56519) [路由测试地址](./speedtest.md)
+[IP源数据下载(本仓库)](https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/data/ServiceTags_Public.json) [IP源数据下载(Azure)](https://www.microsoft.com/en-us/download/details.aspx?id=56519) [路由测试地址](./speedtest.md)
 
 获取香港IPV4段:
 ```

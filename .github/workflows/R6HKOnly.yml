@@ -34,8 +34,8 @@ jobs:
 
     - name: Format Source
       run: |
-        sing-box rule-set compile --output geoip-r6hkonly.srs ./AzureIPGet/main/data/AzureIPBlock.json
-        rm -f ./AzureIPGet/main/data/AzureIPBlock.json
+        sing-box rule-set compile --output geoip-r6hkonly.srs ./AzureIPGet/data/AzureIPBlock.json
+        rm -f ./AzureIPGet/data/AzureIPBlock.json
 
     - name: Push Files
       run: |

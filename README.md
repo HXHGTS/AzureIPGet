@@ -2,6 +2,8 @@
 
 用于解析R6亚太除香港外机房IP，实现精确匹配区域
 
+[sing-box 彩虹六号亚服锁区规则](https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/data/AzureIPBlock.json)
+
 运行:
 ```
 curl -sSL https://cdn.jsdelivr.net/gh/HXHGTS/AzureIPGet@main/JsonGet.sh | bash
@@ -12,7 +14,6 @@ curl -sSL https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/JsonGet.sh | 
 ```
 curl -sSL https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/JsonToClient.sh | bash
 ```
-[IP源数据下载(本仓库)](https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/data/ServiceTags_Public.json) [IP源数据下载(Azure)](https://www.microsoft.com/en-us/download/details.aspx?id=56519) [路由测试地址](./speedtest.md)
 
 获取香港IPV4段:
 ```
@@ -37,3 +38,7 @@ chmod +x udping.sh
 
 bash udping.sh
 ```
+
+[IP源数据下载(本仓库)](https://raw.githubusercontent.com/HXHGTS/AzureIPGet/main/data/ServiceTags_Public.json) [IP源数据下载(Azure)](https://www.microsoft.com/en-us/download/details.aspx?id=56519)
+
+[路由测试地址](./speedtest.md) 

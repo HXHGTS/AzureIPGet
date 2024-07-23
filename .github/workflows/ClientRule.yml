@@ -18,7 +18,7 @@ jobs:
 
     - name: Install Necessary Tools
       run: |
-        sudo apt install -y jq wget sed coreutils
+        sudo apt install -y curl jq wget sed coreutils git
 
     - name: Download Json
       run: |

@@ -34,8 +34,9 @@ jobs:
 
     - name: Format Source
       run: |
-        sing-box rule-set compile --output geoip-r6hkonly.srs ./AzureIPGet/data/AzureIPBlock.json
-        rm -f ./AzureIPGet/data/AzureIPBlock.json
+        jq '.route | {version: 1, rules: [.rules[] | del(.outbound)]}' ./AzureIPGet/data/AzureIPBlock.json > AzureIPBlockRule.json
+        sing-box rule-set compile --output geoip-r6hkonly.srs AzureIPBlockRule.json
+        rm -rf ./AzureIPGet AzureIPBlockRule.json
 
     - name: Push Files
       run: |

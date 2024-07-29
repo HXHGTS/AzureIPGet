@@ -30,29 +30,27 @@ jobs:
         run: |
           ip_cidr=(); while IFS= read -r line; do ip_cidr+=("$line"); done <ip.txt; json_content=$(printf '{"route":{"rules":[{"process_name":["RainbowSix.exe","RainbowSix_Vulkan.exe"],"ip_cidr":[%s],"network":["udp"],"port_range":["3060:3090","6000:6100","10000:10099"],"outbound":"REJECT"}]}}' "$(printf '"%s",' "${ip_cidr[@]}" | sed 's/,$//')"); echo "$json_content" | jq > AzureIPBlock.json
 
-      - name: Check for Changes
+      - name: Configure Git User
+        run: |
+          git config --global user.email "${{ secrets.GH_EMAIL }}"
+          git config --global user.name "github-actions[bot]"
+
+      - name: Check for Changes and Push Files
         run: |
           git fetch
           git add .
           if ! git diff --quiet origin/main; then
             echo "Local changes detected, force updating repository with local content."
+            sudo mkdir -p data
+            sudo mv -f ServiceTags_Public.json ip.txt AzureIPBlock.json data
+            sudo chown -R $USER:$USER data
+            sudo chmod -R 755 data
+            sudo git add data/
             git commit -m "Force update with local content"
             git push --force
           else
-            echo "No changes detected, proceeding with normal push."
+            echo "No changes detected, no push needed."
           fi
-
-      - name: Push Files
-        run: |
-          sudo mkdir -p data
-          sudo mv -f ServiceTags_Public.json ip.txt AzureIPBlock.json data
-          sudo chown -R $USER:$USER data
-          sudo chmod -R 755 data
-          git config --global user.email "${{ secrets.GH_EMAIL }}"
-          git config --global user.name "github-actions[bot]"
-          sudo git add data/
-          git commit -m "Auto update sing-box RainbowSix ip block rule successfully!"
-          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         continue-on-error: true

@@ -46,7 +46,8 @@ jobs:
         sudo chmod -R 777 NewRelease
         git config --global user.email "${{ secrets.GH_EMAIL }}"
         git config --global user.name "github-actions[bot]"
-        sudo git add NewRelease/geoip/*.srs
+        cd NewRelease
+        sudo git add geoip/*.srs
         git fetch
         if git diff-index --quiet HEAD --; then
           echo "No changes to commit"

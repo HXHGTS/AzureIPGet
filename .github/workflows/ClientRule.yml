@@ -46,7 +46,7 @@ jobs:
         run: |
           git fetch
           sudo git add NewRelease/data
-          if ! git diff --quiet origin/main -- data/; then
+          if ! git diff --quiet origin/main -- NewRelease/data/; then
             echo "Local changes detected, force updating repository with local content."
             git commit -m "Force update with local content"
             git push --force origin main:data

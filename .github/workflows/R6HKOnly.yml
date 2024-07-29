@@ -16,7 +16,7 @@ jobs:
 
     - name: Install Necessary Tools
       run: |
-        sudo apt install -y jq wget curl
+        sudo apt-get install -y jq wget curl
 
     - name: Install sing-box
       run: |

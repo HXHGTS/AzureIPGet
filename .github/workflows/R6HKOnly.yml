@@ -40,24 +40,20 @@ jobs:
 
     - name: Push Files
       run: |
-        sudo mkdir -p NewRelease/geoip
-        sudo mv -f geoip-r6hkonly.srs NewRelease/geoip/geoip-r6hkonly.srs
-        sudo chown -R $USER:$USER NewRelease
-        sudo chmod -R 777 NewRelease
+        sudo mkdir -p geoip
+        sudo mv -f geoip-r6hkonly.srs geoip/geoip-r6hkonly.srs
+        sudo chown -R $USER:$USER geoip
+        sudo chmod -R 777 geoip
         git config --global user.email "${{ secrets.GH_EMAIL }}"
         git config --global user.name "github-actions[bot]"
-        sudo git add NewRelease/geoip/*.srs
-        git fetch
-        if ! git diff --quiet origin/main:geoip -- NewRelease/geoip/; then
-          echo "No changes to commit"
-        else
-          git commit -m "Auto Compile telegram geoip source file"
-          git push --force origin main:geoip
-        fi
+        sudo git add geoip/*.srs
+        git commit -m "Auto Compile telegram geoip source file"
+        git push --force
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         ACTIONS_RUNNER_DEBUG: true
         ACTIONS_STEP_DEBUG: true
+      continue-on-error: true
 
     - name: Create tag
       id: create_tag
@@ -84,6 +80,6 @@ jobs:
           echo "Release $TAG_NAME already exists, deleting it."
           gh release delete "$TAG_NAME" --yes
         fi
-        gh release create "$TAG_NAME" --title "$TAG_NAME" --notes "Auto-generated release for $TAG_NAME" NewRelease/geoip/geoip-r6hkonly.srs
+        gh release create "$TAG_NAME" --title "$TAG_NAME" --notes "Auto-generated release for $TAG_NAME" geoip/geoip-r6hkonly.srs
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

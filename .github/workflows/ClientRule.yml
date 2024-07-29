@@ -35,17 +35,19 @@ jobs:
           git config --global user.email "${{ secrets.GH_EMAIL }}"
           git config --global user.name "github-actions[bot]"
 
+      - name: Prepare Data Folder
+        run: |
+          sudo mkdir -p data
+          sudo mv -f ServiceTags_Public.json ip.txt AzureIPBlock.json data
+          sudo chown -R $USER:$USER data
+          sudo chmod -R 755 data
+
       - name: Check for Changes and Push Files
         run: |
           git fetch
-          git add .
-          if ! git diff --quiet origin/main; then
+          sudo git add data/
+          if ! git diff --quiet origin/main -- data/; then
             echo "Local changes detected, force updating repository with local content."
-            sudo mkdir -p data
-            sudo mv -f ServiceTags_Public.json ip.txt AzureIPBlock.json data
-            sudo chown -R $USER:$USER data
-            sudo chmod -R 755 data
-            sudo git add data/
             git commit -m "Force update with local content"
             git push --force
           else

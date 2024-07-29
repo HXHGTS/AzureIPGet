@@ -37,22 +37,17 @@ jobs:
 
       - name: Prepare Data Folder
         run: |
-          sudo mkdir -p NewRelease/data
-          sudo mv -f ServiceTags_Public.json ip.txt AzureIPBlock.json NewRelease/data
-          sudo chown -R $USER:$USER NewRelease
-          sudo chmod -R 755 NewRelease
+          sudo mkdir -p data
+          sudo mv -f ServiceTags_Public.json ip.txt AzureIPBlock.json data
+          sudo chown -R $USER:$USER data
+          sudo chmod -R 755 data
 
       - name: Check for Changes and Push Files
         run: |
-          git fetch
-          sudo git add NewRelease/data
-          if ! git diff --quiet origin/main -- NewRelease/data/; then
-            echo "Local changes detected, force updating repository with local content."
-            git commit -m "Force update with local content"
-            git push --force origin main:data
-          else
-            echo "No changes detected, no push needed."
-          fi
+          sudo git add data
+          echo "Local changes detected, force updating repository with local content."
+          git commit -m "Force update with local content"
+          git push --force
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         continue-on-error: true

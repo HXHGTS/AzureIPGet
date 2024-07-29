@@ -33,9 +33,9 @@ jobs:
       - name: Check for Changes
         run: |
           git fetch
+          git add .
           if ! git diff --quiet origin/main; then
             echo "Local changes detected, force updating repository with local content."
-            git add .
             git commit -m "Force update with local content"
             git push --force
           else

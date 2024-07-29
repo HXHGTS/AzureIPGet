@@ -49,7 +49,7 @@ jobs:
           if ! git diff --quiet origin/main -- data/; then
             echo "Local changes detected, force updating repository with local content."
             git commit -m "Force update with local content"
-            git push --force
+            git push --force origin main:data
           else
             echo "No changes detected, no push needed."
           fi

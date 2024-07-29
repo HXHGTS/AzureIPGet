@@ -49,7 +49,7 @@ jobs:
         cd NewRelease
         sudo git add geoip/*.srs
         git fetch
-        if git diff-index --quiet HEAD --; then
+        if ! git diff --quiet origin/main:geoip -- NewRelease/geoip/; then
           echo "No changes to commit"
         else
           git commit -m "Auto Compile telegram geoip source file"

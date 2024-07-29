@@ -37,15 +37,15 @@ jobs:
 
       - name: Prepare Data Folder
         run: |
-          sudo mkdir -p data
-          sudo mv -f ServiceTags_Public.json ip.txt AzureIPBlock.json data
-          sudo chown -R $USER:$USER data
-          sudo chmod -R 755 data
+          sudo mkdir -p NewRelease/data
+          sudo mv -f ServiceTags_Public.json ip.txt AzureIPBlock.json NewRelease/data
+          sudo chown -R $USER:$USER NewRelease
+          sudo chmod -R 755 NewRelease
 
       - name: Check for Changes and Push Files
         run: |
           git fetch
-          sudo git add data/
+          sudo git add NewRelease/data
           if ! git diff --quiet origin/main -- data/; then
             echo "Local changes detected, force updating repository with local content."
             git commit -m "Force update with local content"

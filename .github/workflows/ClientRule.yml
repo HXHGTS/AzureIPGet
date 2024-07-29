@@ -42,7 +42,7 @@ jobs:
           sudo chown -R $USER:$USER data
           sudo chmod -R 755 data
 
-      - name: Check for Changes and Push Files
+      - name: Push Files
         run: |
           sudo git add data
           echo "Local changes detected, force updating repository with local content."

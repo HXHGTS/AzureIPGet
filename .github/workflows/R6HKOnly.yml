@@ -48,7 +48,7 @@ jobs:
         git config --global user.name "github-actions[bot]"
         sudo git add geoip/*.srs
         git commit -m "Auto Compile telegram geoip source file"
-        git push --force
+        git push --force origin Release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         ACTIONS_RUNNER_DEBUG: true

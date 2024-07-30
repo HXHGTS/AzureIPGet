@@ -22,7 +22,7 @@ jobs:
 
       - name: Download Json
         run: |
-          curl 'https://www.microsoft.com/en-us/download/details.aspx?id=56519' -A firefox | sed -e 's/"/\n/g' | grep ServiceTags_Public_ | grep https | head -n 1 >GetAzureIPRange.txt
+          curl -fsSL 'https://www.microsoft.com/en-us/download/details.aspx?id=56519' -A firefox | sed -e 's/"/\n/g' | grep ServiceTags_Public_ | grep https | head -n 1 >GetAzureIPRange.txt
           wget -O ServiceTags_Public.json -i GetAzureIPRange.txt
           jq '.values[] | select(.id | test("AzureCloud")) | select(.properties.region | test("japaneast|japanwest|koreacentral|koreasouth")) | .properties.addressPrefixes' ServiceTags_Public.json | grep -v : | sed -e 's/"//g;s/,//g;s/\[//g;s/\]//g;s/{//g;s/}//g;s/ //g' | grep / >ip.txt
 

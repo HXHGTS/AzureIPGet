@@ -45,9 +45,9 @@ jobs:
       - name: Push Files
         run: |
           sudo git add data
-          echo "Local changes detected, force updating repository with local content."
-          git commit -m "Force update with local content"
-          git push --force
+          echo "Force updating repository with local content."
+          git commit -m "Update Azure ip data"
+          git push --force origin Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         continue-on-error: true

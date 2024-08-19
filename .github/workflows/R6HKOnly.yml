@@ -41,26 +41,23 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+    - name: Create Dir
+      run: |
+        mkdir -p geoip
+        sudo chown -R $USER:$USER geoip
+        sudo chmod -R 777 geoip
+
     - name: Format And Compile sing-box srs File
       run: |
         jq '.route | {version: 1, rules: [.rules[] | del(.outbound)]}' ./AzureIPGet/data/AzureIPBlock.json > AzureIPBlockRule.json
-        sing-box rule-set compile --output geoip-r6hkonly.srs AzureIPBlockRule.json
+        sing-box rule-set compile --output ./geoip/geoip-r6hkonly.srs AzureIPBlockRule.json
 
     - name: Compile mihomo mrs File
       run: |
-        mihomo convert-ruleset ipcidr text ./AzureIPGet/data/ip.txt geoip-r6hkonly.mrs
-
-    - name: Clean
-      run: |
-        rm -f AzureIPBlockRule.json
+        mihomo convert-ruleset ipcidr text ./AzureIPGet/data/ip.txt ./geoip/geoip-r6hkonly.mrs
 
     - name: Push Files
       run: |
-        sudo mkdir -p geoip
-        sudo mv -f geoip-r6hkonly.srs geoip/geoip-r6hkonly.srs
-        sudo mv -f geoip-r6hkonly.mrs geoip/geoip-r6hkonly.mrs
-        sudo chown -R $USER:$USER geoip
-        sudo chmod -R 777 geoip
         git config --global user.name 'github-actions'
         git config --global user.email 'github-actions@github.com'
         git add geoip/*.srs

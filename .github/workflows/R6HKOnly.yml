@@ -18,7 +18,14 @@ jobs:
 
     - name: Install Necessary Tools
       run: |
-        sudo apt-get install -y jq wget curl
+        sudo apt-get install -y jq wget curl gzip
+
+    - name: Install mihomo
+      run: |
+        wget -O mihomo-linux-amd64-alpha-8298489.gz https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/mihomo-linux-amd64-alpha-8298489.gz
+        gzip -d mihomo-linux-amd64-alpha-8298489.gz
+        sudo mv -f mihomo-linux-amd64-alpha-8298489 /usr/local/bin/mihomo
+        sudo chmod +x /usr/local/bin/mihomo
 
     - name: Install sing-box
       run: |
@@ -34,21 +41,26 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Format Source
+    - name: Format And Compile sing-box srs File
       run: |
         jq '.route | {version: 1, rules: [.rules[] | del(.outbound)]}' ./AzureIPGet/data/AzureIPBlock.json > AzureIPBlockRule.json
         sing-box rule-set compile --output geoip-r6hkonly.srs AzureIPBlockRule.json
         rm -rf ./AzureIPGet AzureIPBlockRule.json
 
+    - name: Compile mihomo mrs File
+      run: |
+        mihomo convert-ruleset ipcidr text ./AzureIPGet/data/ip.txt geoip-r6hkonly.mrs
+
     - name: Push Files
       run: |
         sudo mkdir -p geoip
         sudo mv -f geoip-r6hkonly.srs geoip/geoip-r6hkonly.srs
+        sudo mv -f geoip-r6hkonly.mrs geoip/geoip-r6hkonly.mrs
         sudo chown -R $USER:$USER geoip
         sudo chmod -R 777 geoip
         git config --global user.name 'github-actions'
         git config --global user.email 'github-actions@github.com'
-        sudo git add geoip/*.srs
+        sudo git add geoip/*.srs geoip/*.mrs
         git commit -m "Auto Compile telegram geoip source file"
         git push --force origin Release
       env:
@@ -82,6 +94,6 @@ jobs:
           echo "Release $TAG_NAME already exists, deleting it."
           gh release delete "$TAG_NAME" --yes
         fi
-        gh release create "$TAG_NAME" --title "$TAG_NAME" --notes "Auto-generated release for $TAG_NAME" geoip/geoip-r6hkonly.srs
+        gh release create "$TAG_NAME" --title "$TAG_NAME" --notes "Auto-generated release for $TAG_NAME" geoip/geoip-r6hkonly.srs geoip/geoip-r6hkonly.mrs
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -52,7 +52,7 @@ jobs:
 
     - name: Clean
       run: |
-        rm -rf ./AzureIPGet AzureIPBlockRule.json
+        rm -f AzureIPBlockRule.json
 
     - name: Push Files
       run: |
@@ -63,7 +63,8 @@ jobs:
         sudo chmod -R 777 geoip
         git config --global user.name 'github-actions'
         git config --global user.email 'github-actions@github.com'
-        sudo git add geoip/*.srs geoip/*.mrs
+        git add geoip/*.srs
+        git add geoip/*.mrs
         git commit -m "Auto Compile telegram geoip source file"
         git push --force origin Release
       env:

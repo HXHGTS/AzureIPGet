@@ -3,7 +3,7 @@ name: Compile Rainbow Six Siege Asian Server filter geoip source file
 on:
   push:
     branches:
-      - main
+      - Release
   schedule:
     - cron: '0 0 * * *'
   workflow_dispatch:
@@ -22,9 +22,9 @@ jobs:
 
     - name: Install mihomo
       run: |
-        wget -O mihomo-linux-amd64-alpha-8298489.gz https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/mihomo-linux-amd64-alpha-8298489.gz
-        gzip -d mihomo-linux-amd64-alpha-8298489.gz
-        sudo mv -f mihomo-linux-amd64-alpha-8298489 /usr/local/bin/mihomo
+        wget -O mihomo-linux-amd64-v1.18.7.gz https://github.com/MetaCubeX/mihomo/releases/download/v1.18.7/mihomo-linux-amd64-v1.18.7.gz
+        gzip -d mihomo-linux-amd64-v1.18.7.gz
+        sudo mv -f mihomo-linux-amd64-v1.18.7 /usr/local/bin/mihomo
         sudo chmod +x /usr/local/bin/mihomo
 
     - name: Install sing-box

@@ -1,11 +1,13 @@
 name: Compile Rainbow Six Siege Asian Server filter geoip source file
 
 on:
-  push:
-    branches:
-      - Release
+  workflow_run:
+    workflows:
+      - "ClientRule.yml"
+    types:
+      - completed
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '30 0 * * *'
   workflow_dispatch:
 
 jobs:

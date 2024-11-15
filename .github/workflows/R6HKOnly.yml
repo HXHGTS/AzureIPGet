@@ -36,7 +36,7 @@ jobs:
         echo "deb [arch=`dpkg --print-architecture` signed-by=/etc/apt/keyrings/sagernet.asc] https://deb.sagernet.org/ * *" | \
         sudo tee /etc/apt/sources.list.d/sagernet.list > /dev/null
         sudo apt-get update
-        sudo apt-get install -y sing-box
+        sudo apt-get install -y --allow-downgrades sing-box=1.8.14
     
     - name: Pull code from remote
       run: gh repo clone HXHGTS/AzureIPGet

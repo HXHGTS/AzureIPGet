@@ -1,3 +1,5 @@
+### AWS服务器
+```
 美国东部/阿什本 qos-servers-f1b9e5bc9f7295f2.elb.us-east-1.amazonaws.com
 巴林/麦纳麦 qos-server-adde777f4bf8ec31.elb.me-south-1.amazonaws.com
 韩国/首尔 qos-servers-48950808f0fe2c5a.elb.ap-northeast-2.amazonaws.com
@@ -10,6 +12,9 @@
 美国东部/华盛顿 qos-servers-8c8446183bf903b5.elb.us-east-2.amazonaws.com
 德国/黑森州/法兰克福 qos-servers-b0aaad7f19f70dc5.elb.eu-central-1.amazonaws.com
 美国/俄勒冈/波特兰 qos-servers-be4caaefbb53791d.elb.us-west-2.amazonaws.com
+```
+### Azure服务器
+```
 美国西部/圣克拉拉 mpsqosprod.westus.cloudapp.azure.com
 美国东部/新泽西 mpsqosprod.eastus.cloudapp.azure.com
 巴西南部 mpsqosprod.brazilsouth.cloudapp.azure.com
@@ -23,3 +28,4 @@
 美国中南部 mpsqosprod.southcentralus.cloudapp.azure.com
 阿联酋北部 mpsqosprod.uaenorth.cloudapp.azure.com
 日本/东京都/东京 pfmsqosprod2-0.japaneast.cloudapp.azure.com
+```

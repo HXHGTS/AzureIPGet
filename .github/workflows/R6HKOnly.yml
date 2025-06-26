@@ -1,13 +1,13 @@
 name: Compile Rainbow Six Siege Asian Server filter geoip source file
 
 on:
-  workflow_run:
-    workflows: 
-      - 'sing-box RainbowSix ip block rule'
-    types:
-      - completed
+  #workflow_run:
+    #workflows: 
+      #- 'sing-box RainbowSix ip block rule'
+    #types:
+      #- completed
   schedule:
-    - cron: '30 0 * * *'
+    - cron: '0 2 * * *'
   workflow_dispatch:
 
 jobs:

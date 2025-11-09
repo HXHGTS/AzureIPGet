@@ -1,0 +1,7 @@
+payload:
+  - GEOSITE,snodehome
+  - DOMAIN-SUFFIX,ahdohpiechei.com
+  - DOMAIN-SUFFIX,nexusedgeio.com
+  - DOMAIN-SUFFIX,mcdn.bilivideo.cn
+  - DOMAIN-REGEX,^[A-Za-z0-9.-]+-pcdn-[A-Za-z0-9.-]+\.biliapi\.net$
+  

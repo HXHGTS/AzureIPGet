@@ -5,3 +5,4 @@ payload:
   - DOMAIN-SUFFIX,edge.mountaintoys.cn
   - DOMAIN,hw-edge.solseed.cn
   - DOMAIN-REGEX,^[A-Za-z0-9.-]+-pcdn-[A-Za-z0-9.-]+\.biliapi\.net$
+  - DOMAIN,httpdns.bilivideo.com

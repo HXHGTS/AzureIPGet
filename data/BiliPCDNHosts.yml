@@ -1,4 +1,5 @@
 payload:
+  - DOMAIN-REGEX,^[A-Za-z0-9.-]+-pcdn-[A-Za-z0-9.-]+\.biliapi\.net$
   - DOMAIN-SUFFIX,ahdohpiechei.com
   - DOMAIN-SUFFIX,nexusedgeio.com
   - DOMAIN,upos-sz-302kodo.bilivideo.com
@@ -6,7 +7,6 @@ payload:
   - DOMAIN-SUFFIX,edge.mountaintoys.cn
   - DOMAIN,hw-edge.solseed.cn
   - DOMAIN,ali-edge.solseed.cn
-  - DOMAIN-REGEX,^[A-Za-z0-9.-]+-pcdn-[A-Za-z0-9.-]+\.biliapi\.net$
   - DOMAIN-SUFFIX,v1d.szbdyd.com
   - DOMAIN,unet.quark.cn
   - DOMAIN,httpdns.bilivideo.com

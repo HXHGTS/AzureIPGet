@@ -13,3 +13,4 @@ payload:
   - IP-CIDR,203.119.238.194/32
   - IP-CIDR,203.119.238.240/32
   - IP-CIDR,203.119.204.80/32
+  - DOMAIN,unet.quark.cn

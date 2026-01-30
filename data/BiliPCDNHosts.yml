@@ -3,6 +3,7 @@ payload:
   - DOMAIN-SUFFIX,ahdohpiechei.com
   - DOMAIN-SUFFIX,nexusedgeio.com
   - DOMAIN,upos-sz-302kodo.bilivideo.com
+  - DOMAIN,upos-sz-302ppio.bilivideo.com
   - DOMAIN-SUFFIX,mcdn.bilivideo.cn
   - DOMAIN-SUFFIX,edge.mountaintoys.cn
   - DOMAIN,hw-edge.solseed.cn

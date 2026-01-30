@@ -8,7 +8,6 @@ payload:
   - DOMAIN-SUFFIX,edge.mountaintoys.cn
   - DOMAIN,hw-edge.solseed.cn
   - DOMAIN,ali-edge.solseed.cn
-  - DOMAIN-SUFFIX,v1d.szbdyd.com
   - DOMAIN,unet.quark.cn
   - DOMAIN,httpdns.bilivideo.com
   - IP-CIDR,203.119.206.8/32

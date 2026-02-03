@@ -1,3 +1,4 @@
 payload:
+  # https://support.unity.com/hc/en-us/articles/4407491745940-Vivox-What-IPs-and-ports-are-required-for-Vivox-to-work
   - IP-CIDR,85.236.96.0/21
   - IP-CIDR,85.236.104.0/23
